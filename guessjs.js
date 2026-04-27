@@ -286,7 +286,8 @@ function updateBonusVisibility() {
 }
 
 function updateMessageButton() {
-  messageButton.hidden = !showBonusMessage;
+  const onMenuScreen = screens.menu.classList.contains("active");
+  messageButton.hidden = !(showBonusMessage || onMenuScreen);
 }
 
 function showScreen(screenName) {
@@ -465,10 +466,10 @@ function backToMenu() {
   currentMode = null;
   currentModeKey = null;
   showBonusMessage = false;
-  updateMessageButton();
   appShell.classList.remove("clearing", "show-letter");
   updateBonusVisibility();
   showScreen("menu");
+  updateMessageButton();
 }
 
 function showLetter() {
@@ -480,6 +481,7 @@ function showLetter() {
     appShell.classList.remove("clearing");
     appShell.classList.add("show-letter");
     showScreen("letter");
+    updateMessageButton();
   }, 650);
 }
 

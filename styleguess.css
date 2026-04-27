@@ -33,6 +33,7 @@ body {
   display: grid;
   place-items: center;
   padding: 24px;
+  width: 100%;
 }
 
 .app-shell.clearing .game-card {
@@ -43,7 +44,7 @@ body {
 }
 
 .app-shell.show-letter {
-  place-items: stretch;
+  place-items: center;
 }
 
 .game-card {
@@ -229,6 +230,7 @@ h1 {
 .letter-panel {
   max-width: 720px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .letter-text {
