@@ -6,7 +6,7 @@ const GAME_MODES = {
   easy: {
     label: "Easy",
     theme: "General Knowledge",
-    answerTime: 12,
+    answerTime: 17,
     questions: [
       {
         prompt: "Which planet is known as the Red Planet?",
@@ -63,7 +63,7 @@ const GAME_MODES = {
   medium: {
     label: "Medium",
     theme: "Filipino Cuisine",
-    answerTime: 8,
+    answerTime: 13,
     questions: [
       {
         prompt: "Which Filipino dish is often called the country's unofficial national dish?",
@@ -120,7 +120,7 @@ const GAME_MODES = {
   hard: {
     label: "Hard",
     theme: "Filipino Singers, Bands, and Rappers",
-    answerTime: 5,
+    answerTime: 10,
     questions: [
       {
         prompt: "Which Filipino rapper is known for the hit song 'Pauwi Nako' with Flow G?",
@@ -177,7 +177,7 @@ const GAME_MODES = {
   bonus: {
     label: "Bonus",
     theme: "...",
-    answerTime: 6,
+    answerTime: 11,
     questions: [
       {
         prompt: "Which of these international bands is my favorite?",
@@ -320,11 +320,10 @@ function renderQuestion() {
 
   let revealTimeLeft = QUESTION_DELAY;
   phaseLabel.textContent = "Memorize the question before the choices appear.";
-  timerValue.textContent = revealTimeLeft;
+  timerValue.textContent = "--";
 
   revealInterval = setInterval(() => {
     revealTimeLeft -= 1;
-    timerValue.textContent = Math.max(revealTimeLeft, 0);
 
     if (revealTimeLeft <= 0) {
       clearInterval(revealInterval);
