@@ -508,9 +508,9 @@ h1 {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(520px, calc(100vw - 48px));
-  max-height: min(70vh, 520px);
-  padding: 34px 30px;
+  width: min(640px, calc(100vw - 40px));
+  max-height: min(78vh, 640px);
+  padding: 38px 34px;
   border-radius: 28px;
   background: linear-gradient(165deg, rgba(255, 249, 252, 0.96), rgba(243, 249, 244, 0.94));
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -526,6 +526,7 @@ h1 {
 .secret-stage.open .secret-paper {
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
+  pointer-events: auto;
 }
 
 .letter-arrow-button {
