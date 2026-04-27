@@ -1,4 +1,6 @@
 const QUESTION_DELAY = 5;
+const BONUS_UNLOCK_SCORE = 25;
+const TOTAL_SCORE_KEY = "guessing-game-total-score";
 
 const GAME_MODES = {
   easy: {
@@ -136,7 +138,7 @@ const GAME_MODES = {
         answer: "Moira Dela Torre"
       },
       {
-        prompt: "Who is the Filipino singer behind the songs 'Binibini' and 'Isa Dalawa Tatlo'?",
+        prompt: "Who is the Filipino singer behind the songs 'PAPALAYO' and 'Isa Dalawa Tatlo'?",
         choices: ["Zack Tabudlo", "TJ Monterde", "Dionela", "Arthur Nery"],
         answer: "Zack Tabudlo"
       },
@@ -146,7 +148,7 @@ const GAME_MODES = {
         answer: "Norman Dellosa"
       },
       {
-        prompt: "Which rapper is known for the songs 'Neneng B' and 'Burgis'?",
+        prompt: "Which rapper is known for the song 'KG'?",
         choices: ["Nik Makino", "Flow G", "Hev Abi", "Loonie"],
         answer: "Nik Makino"
       },
@@ -161,14 +163,71 @@ const GAME_MODES = {
         answer: "BINI"
       },
       {
-        prompt: "Which Filipino singer-songwriter is behind the songs 'Mahika' and 'Marilag'?",
+        prompt: "Which Filipino singer-songwriter is behind the song '153'?",
         choices: ["Adie", "TJ Monterde", "Dionela", "Arthur Nery"],
         answer: "Dionela"
       },
       {
-        prompt: "Which artist is known for the songs 'Mundo,' 'Hanggang Kailan,' and 'You'll Be Safe Here'?",
+        prompt: "Which artist is known for the song 'Aura'?",
         choices: ["Arthur Nery", "Juan Karlos", "Unique Salonga", "Adie"],
         answer: "Unique Salonga"
+      }
+    ]
+  },
+  bonus: {
+    label: "Bonus",
+    theme: "Mixed Challenge",
+    answerTime: 5,
+    questions: [
+      {
+        prompt: "Which P-pop girl group popularized the song 'Pantropiko'?",
+        choices: ["BINI", "KAIA", "G22", "4th Impact"],
+        answer: "BINI"
+      },
+      {
+        prompt: "Which Filipino dish is famous for its rich peanut sauce?",
+        choices: ["Tinola", "Kare-kare", "Bicol Express", "Paksiw"],
+        answer: "Kare-kare"
+      },
+      {
+        prompt: "Which planet is known for having rings?",
+        choices: ["Mars", "Saturn", "Venus", "Neptune"],
+        answer: "Saturn"
+      },
+      {
+        prompt: "Who sings the OPM song 'Raining in Manila'?",
+        choices: ["Cup of Joe", "Lola Amour", "Ben&Ben", "The Juans"],
+        answer: "Lola Amour"
+      },
+      {
+        prompt: "What is the main sour ingredient commonly used in sinigang?",
+        choices: ["Tamarind", "Calamansi", "Soy sauce", "Ginger"],
+        answer: "Tamarind"
+      },
+      {
+        prompt: "How many continents are there on Earth?",
+        choices: ["5", "6", "7", "8"],
+        answer: "7"
+      },
+      {
+        prompt: "Which Filipino rapper collaborated on the hit song 'Pauwi Nako'?",
+        choices: ["Loonie", "Skusta Clee", "Bassilyo", "Abra"],
+        answer: "Skusta Clee"
+      },
+      {
+        prompt: "Which dessert is made with shaved ice, milk, and mixed sweet toppings?",
+        choices: ["Bibingka", "Leche flan", "Halo-halo", "Maja blanca"],
+        answer: "Halo-halo"
+      },
+      {
+        prompt: "Which animal is known as the largest mammal on Earth?",
+        choices: ["African elephant", "Blue whale", "Orca", "Whale shark"],
+        answer: "Blue whale"
+      },
+      {
+        prompt: "Which artist is behind the OPM song 'Mahika'?",
+        choices: ["Adie", "Arthur Nery", "Dionela", "TJ Monterde"],
+        answer: "Adie"
       }
     ]
   }
@@ -194,13 +253,33 @@ const resultTitle = document.getElementById("resultTitle");
 const resultSummary = document.getElementById("resultSummary");
 const playAgainButton = document.getElementById("playAgainButton");
 const resultMenuButton = document.getElementById("resultMenuButton");
+const bonusModeCard = document.getElementById("bonusModeCard");
 
 let currentMode = null;
+let currentModeKey = null;
 let currentQuestionIndex = 0;
 let score = 0;
+let totalScore = getStoredTotalScore();
 let revealInterval = null;
 let answerInterval = null;
 let canAnswer = false;
+
+function getStoredTotalScore() {
+  const savedValue = Number.parseInt(localStorage.getItem(TOTAL_SCORE_KEY) || "0", 10);
+  return Number.isNaN(savedValue) ? 0 : savedValue;
+}
+
+function saveTotalScore() {
+  localStorage.setItem(TOTAL_SCORE_KEY, String(totalScore));
+}
+
+function isBonusUnlocked() {
+  return totalScore >= BONUS_UNLOCK_SCORE;
+}
+
+function updateBonusVisibility() {
+  bonusModeCard.hidden = !isBonusUnlocked();
+}
 
 function showScreen(screenName) {
   Object.entries(screens).forEach(([key, screen]) => {
@@ -214,7 +293,12 @@ function clearTimers() {
 }
 
 function startGame(modeKey) {
+  if (modeKey === "bonus" && !isBonusUnlocked()) {
+    return;
+  }
+
   currentMode = GAME_MODES[modeKey];
+  currentModeKey = modeKey;
   currentQuestionIndex = 0;
   score = 0;
   scoreValue.textContent = score;
@@ -298,6 +382,8 @@ function handleAnswer(selectedChoice, selectedButton) {
 
   if (selectedChoice === currentQuestion.answer) {
     score += 1;
+    totalScore += 1;
+    saveTotalScore();
     scoreValue.textContent = score;
     feedbackText.textContent = "Correct answer!";
   } else {
@@ -349,6 +435,7 @@ function goToNextQuestion() {
 function showResults() {
   clearTimers();
   showScreen("result");
+  updateBonusVisibility();
 
   const totalQuestions = currentMode.questions.length;
   const percentage = Math.round((score / totalQuestions) * 100);
@@ -363,13 +450,21 @@ function showResults() {
     resultTitle.textContent = "Keep practicing!";
   }
 
-  resultSummary.textContent =
-    `You answered ${score} out of ${totalQuestions} questions correctly in ${currentMode.label} mode.`;
+  if (isBonusUnlocked()) {
+    resultSummary.textContent =
+      `You answered ${score} out of ${totalQuestions} questions correctly in ${currentMode.label} mode. Bonus Round is now unlocked.`;
+  } else {
+    const pointsNeeded = BONUS_UNLOCK_SCORE - totalScore;
+    resultSummary.textContent =
+      `You answered ${score} out of ${totalQuestions} questions correctly in ${currentMode.label} mode. Total points: ${totalScore}. Earn ${pointsNeeded} more to unlock the Bonus Round.`;
+  }
 }
 
 function backToMenu() {
   clearTimers();
   currentMode = null;
+  currentModeKey = null;
+  updateBonusVisibility();
   showScreen("menu");
 }
 
@@ -377,13 +472,13 @@ document.querySelectorAll(".mode-card").forEach((button) => {
   button.addEventListener("click", () => startGame(button.dataset.mode));
 });
 
+updateBonusVisibility();
+
 nextButton.addEventListener("click", goToNextQuestion);
 menuButton.addEventListener("click", backToMenu);
 playAgainButton.addEventListener("click", () => {
-  if (currentMode) {
-    startGame(
-      Object.keys(GAME_MODES).find((modeKey) => GAME_MODES[modeKey] === currentMode)
-    );
+  if (currentModeKey) {
+    startGame(currentModeKey);
   }
 });
 resultMenuButton.addEventListener("click", backToMenu);

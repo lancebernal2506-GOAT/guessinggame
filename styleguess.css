@@ -138,6 +138,12 @@ h1 {
   color: #fffafc;
 }
 
+.bonus-card {
+  background:
+    linear-gradient(135deg, rgba(241, 170, 206, 0.82), rgba(232, 223, 217, 0.62), rgba(160, 201, 167, 0.82));
+  color: #fffdfd;
+}
+
 .mode-name,
 .mode-theme,
 .mode-meta {
@@ -161,7 +167,8 @@ h1 {
 }
 
 .mode-card:nth-child(3) .mode-theme,
-.mode-card:nth-child(3) .mode-meta {
+.mode-card:nth-child(3) .mode-meta,
+.bonus-card .mode-meta {
   color: rgba(255, 250, 252, 0.88);
 }
 
