@@ -176,58 +176,58 @@ const GAME_MODES = {
   },
   bonus: {
     label: "Bonus",
-    theme: "Mixed Challenge",
-    answerTime: 5,
+    theme: "...",
+    answerTime: 6,
     questions: [
       {
-        prompt: "Which P-pop girl group popularized the song 'Pantropiko'?",
-        choices: ["BINI", "KAIA", "G22", "4th Impact"],
-        answer: "BINI"
+        prompt: "Which of these international bands is my favorite?",
+        choices: ["Queen", "The Beatles", "Air Supply", "AC/DC"],
+        answer: "Queen"
       },
       {
-        prompt: "Which Filipino dish is famous for its rich peanut sauce?",
-        choices: ["Tinola", "Kare-kare", "Bicol Express", "Paksiw"],
-        answer: "Kare-kare"
+        prompt: "Which of these is my favorite hobby?",
+        choices: ["Watching anime", "Gaming", "Eating", "Sleeping"],
+        answer: "Gaming"
       },
       {
-        prompt: "Which planet is known for having rings?",
-        choices: ["Mars", "Saturn", "Venus", "Neptune"],
-        answer: "Saturn"
+        prompt: "My favorite anime of all time?",
+        choices: ["Naruto", "JJBA", "One Piece", "Death Note"],
+        answer: "One Piece"
       },
       {
-        prompt: "Who sings the OPM song 'Raining in Manila'?",
-        choices: ["Cup of Joe", "Lola Amour", "Ben&Ben", "The Juans"],
-        answer: "Lola Amour"
+        prompt: "When did I started listening to Zild?",
+        choices: ["January 2025", "May 2025", "August 2023", "October 2024"],
+        answer: "October 2024"
       },
       {
-        prompt: "What is the main sour ingredient commonly used in sinigang?",
-        choices: ["Tamarind", "Calamansi", "Soy sauce", "Ginger"],
-        answer: "Tamarind"
+        prompt: "My favorite genggeng song right now?",
+        choices: ["Marikit sa Dilim", "Boyfriend", "Para sa Streets", "Walang Tayo"],
+        answer: "Boyfriend"
       },
       {
-        prompt: "How many continents are there on Earth?",
-        choices: ["5", "6", "7", "8"],
-        answer: "7"
+        prompt: "My favorite Zack Tabudlo song?",
+        choices: ["Binibini", "For you", "Habang Buhay", "Pulso"],
+        answer: "Habang Buhay"
       },
       {
-        prompt: "Which Filipino rapper collaborated on the hit song 'Pauwi Nako'?",
-        choices: ["Loonie", "Skusta Clee", "Bassilyo", "Abra"],
-        answer: "Skusta Clee"
+        prompt: "My favorite chips?",
+        choices: ["Cheezy", "Oishi Potato Chip", "Piknik", "Doritos"],
+        answer: "Oishi Potato Chip"
       },
       {
-        prompt: "Which dessert is made with shaved ice, milk, and mixed sweet toppings?",
-        choices: ["Bibingka", "Leche flan", "Halo-halo", "Maja blanca"],
-        answer: "Halo-halo"
+        prompt: "My favorite Selecta ice cream flavor?",
+        choices: ["Super Thick Vanilla", "Strawberries N' Cream", "Coffee Crumble", "Cookies and Cream"],
+        answer: "Coffee Crumble"
       },
       {
-        prompt: "Which animal is known as the largest mammal on Earth?",
-        choices: ["African elephant", "Blue whale", "Orca", "Whale shark"],
-        answer: "Blue whale"
+        prompt: "My favorite dog breed?",
+        choices: ["Chihuahua", "Golden Retriever", "K9", "Pomeranian"],
+        answer: "Golden Retriever"
       },
       {
-        prompt: "Which artist is behind the OPM song 'Mahika'?",
-        choices: ["Adie", "Arthur Nery", "Dionela", "TJ Monterde"],
-        answer: "Adie"
+        prompt: "Which of these videogames I like the most?",
+        choices: ["Naruto Ultimate Ninja Storm 4", "Ghost of Tsushima", "Valorant", "Stardew Valley"],
+        answer: "Naruto Ultimate Ninja Storm 4"
       }
     ]
   }
