@@ -1,5 +1,6 @@
 const BONUS_UNLOCK_SCORE = 25;
 const TOTAL_SCORE_KEY = "guessing-game-total-score";
+const BONUS_COMPLETED_KEY = "guessing-game-bonus-completed";
 
 const GAME_MODES = {
   easy: {
@@ -267,6 +268,7 @@ let revealInterval = null;
 let answerInterval = null;
 let canAnswer = false;
 let showBonusMessage = false;
+let bonusCompleted = getBonusCompletedState();
 
 function getStoredTotalScore() {
   const savedValue = Number.parseInt(localStorage.getItem(TOTAL_SCORE_KEY) || "0", 10);
@@ -275,6 +277,14 @@ function getStoredTotalScore() {
 
 function saveTotalScore() {
   localStorage.setItem(TOTAL_SCORE_KEY, String(totalScore));
+}
+
+function getBonusCompletedState() {
+  return localStorage.getItem(BONUS_COMPLETED_KEY) === "true";
+}
+
+function saveBonusCompletedState() {
+  localStorage.setItem(BONUS_COMPLETED_KEY, String(bonusCompleted));
 }
 
 function isBonusUnlocked() {
@@ -287,7 +297,8 @@ function updateBonusVisibility() {
 
 function updateMessageButton() {
   const onMenuScreen = screens.menu.classList.contains("active");
-  messageButton.hidden = !(showBonusMessage || onMenuScreen);
+  const canShowOnMenu = onMenuScreen && isBonusUnlocked() && bonusCompleted;
+  messageButton.hidden = !(showBonusMessage || canShowOnMenu);
 }
 
 function showScreen(screenName) {
@@ -436,6 +447,10 @@ function showResults() {
   showScreen("result");
   updateBonusVisibility();
   showBonusMessage = currentModeKey === "bonus";
+  if (currentModeKey === "bonus") {
+    bonusCompleted = true;
+    saveBonusCompletedState();
+  }
   updateMessageButton();
 
   const totalQuestions = currentMode.questions.length;
