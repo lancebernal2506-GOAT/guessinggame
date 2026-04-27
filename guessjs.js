@@ -121,14 +121,14 @@ const GAME_MODES = {
     answerTime: 5,
     questions: [
       {
-        prompt: "Who is widely known as the King of Pinoy Rap?",
-        choices: ["Gloc-9", "Andrew E.", "Francis M.", "Abra"],
-        answer: "Francis M."
+        prompt: "Which Filipino rapper is known for the hit song 'Pauwi Nako' with Flow G?",
+        choices: ["Skusta Clee", "Al James", "Because", "Pricetagg"],
+        answer: "Skusta Clee"
       },
       {
-        prompt: "Which band released the hit song 'Narda'?",
-        choices: ["Eraserheads", "Kamikazee", "Parokya ni Edgar", "Rivermaya"],
-        answer: "Kamikazee"
+        prompt: "Which band is known for the songs 'Kathang Isip' and 'Leaves'?",
+        choices: ["Ben&Ben", "The Juans", "December Avenue", "Cup of Joe"],
+        answer: "Ben&Ben"
       },
       {
         prompt: "Which of these OPM artists is a solo singer-songwriter rather than a band?",
@@ -136,39 +136,39 @@ const GAME_MODES = {
         answer: "Moira Dela Torre"
       },
       {
-        prompt: "Which legendary OPM band is associated with Ely Buendia?",
-        choices: ["Ben&Ben", "Eraserheads", "The Juans", "December Avenue"],
-        answer: "Eraserheads"
+        prompt: "Who is the Filipino singer behind the songs 'Binibini' and 'Isa Dalawa Tatlo'?",
+        choices: ["Zack Tabudlo", "TJ Monterde", "Dionela", "Arthur Nery"],
+        answer: "Zack Tabudlo"
       },
       {
-        prompt: "Who sang the song 'Anak,' one of the most famous Filipino songs worldwide?",
-        choices: ["Gary Valenciano", "Freddie Aguilar", "Martin Nievera", "Ogie Alcasid"],
-        answer: "Freddie Aguilar"
+        prompt: "Which artist sang the viral hit 'Pasilyo' as part of the band SunKissed Lola?",
+        choices: ["Juan Karlos", "Maki", "Norman Dellosa", "Adie"],
+        answer: "Norman Dellosa"
       },
       {
-        prompt: "Which rapper is known for socially conscious storytelling in songs like 'Upuan'?",
-        choices: ["Gloc-9", "Bassilyo", "Skusta Clee", "Loonie"],
-        answer: "Gloc-9"
+        prompt: "Which rapper is known for the songs 'Neneng B' and 'Burgis'?",
+        choices: ["Nik Makino", "Flow G", "Hev Abi", "Loonie"],
+        answer: "Nik Makino"
       },
       {
-        prompt: "Ben&Ben originally became known as what duo name?",
-        choices: ["The Benjamins", "The Dawn", "The Remedy", "The Barefoot Duo"],
-        answer: "The Barefoot Duo"
+        prompt: "Which Filipina pop star is known for the hit song 'Tala'?",
+        choices: ["BINI", "Sarah Geronimo", "Nadine Lustre", "Ylona Garcia"],
+        answer: "Sarah Geronimo"
       },
       {
-        prompt: "Which Filipina singer is known for powerful performances and won The X Factor Philippines?",
-        choices: ["Sarah Geronimo", "KZ Tandingan", "Regine Velasquez", "Morisette"],
-        answer: "KZ Tandingan"
+        prompt: "Which P-pop girl group popularized the songs 'Pantropiko' and 'Salamin, Salamin'?",
+        choices: ["4th Impact", "G22", "BINI", "Kaia"],
+        answer: "BINI"
       },
       {
-        prompt: "Parokya ni Edgar is especially known for blending rock with what style of lyrics?",
-        choices: ["Purely classical", "Humorous and playful", "Only religious", "Entirely instrumental"],
-        answer: "Humorous and playful"
+        prompt: "Which Filipino singer-songwriter is behind the songs 'Mahika' and 'Marilag'?",
+        choices: ["Adie", "TJ Monterde", "Dionela", "Arthur Nery"],
+        answer: "Dionela"
       },
       {
-        prompt: "Which Filipino band is known for the song '214'?",
-        choices: ["Rivermaya", "Moonstar88", "Siakol", "Callalily"],
-        answer: "Rivermaya"
+        prompt: "Which artist is known for the songs 'Mundo,' 'Hanggang Kailan,' and 'You'll Be Safe Here'?",
+        choices: ["Arthur Nery", "Juan Karlos", "Unique Salonga", "Adie"],
+        answer: "Unique Salonga"
       }
     ]
   }
