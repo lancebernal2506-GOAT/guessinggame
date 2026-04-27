@@ -83,8 +83,28 @@
           </div>
         </div>
       </section>
+
+      <section id="letterScreen" class="screen">
+        <article class="letter-panel">
+          <p class="eyebrow">A Little Message</p>
+          <h2>You finished the hidden round.</h2>
+          <p class="letter-text">
+            This is your secret ending. Thanks for playing through the game and making it all the way to the bonus round.
+          </p>
+          <p class="letter-text">
+            You can turn this into a personal letter, a funny reveal, or a special note for someone important to you.
+          </p>
+          <div class="controls centered">
+            <button id="letterMenuButton" class="action-button" type="button">Back to Menu</button>
+          </div>
+        </article>
+      </section>
     </section>
   </main>
+
+  <button id="messageButton" class="message-button" type="button" hidden aria-label="Open message">
+    <span class="message-icon" aria-hidden="true">✉</span>
+  </button>
 
   <script src="guessjs.js"></script>
 </body>

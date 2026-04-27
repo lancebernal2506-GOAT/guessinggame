@@ -1,5 +1,5 @@
 const BONUS_UNLOCK_SCORE = 25;
-const TOTAL_SCORE_KEY = "26";
+const TOTAL_SCORE_KEY = "guessing-game-total-score";
 
 const GAME_MODES = {
   easy: {
@@ -235,7 +235,8 @@ const GAME_MODES = {
 const screens = {
   menu: document.getElementById("menuScreen"),
   game: document.getElementById("gameScreen"),
-  result: document.getElementById("resultScreen")
+  result: document.getElementById("resultScreen"),
+  letter: document.getElementById("letterScreen")
 };
 
 const modeLabel = document.getElementById("modeLabel");
@@ -253,6 +254,9 @@ const resultSummary = document.getElementById("resultSummary");
 const playAgainButton = document.getElementById("playAgainButton");
 const resultMenuButton = document.getElementById("resultMenuButton");
 const bonusModeCard = document.getElementById("bonusModeCard");
+const letterMenuButton = document.getElementById("letterMenuButton");
+const messageButton = document.getElementById("messageButton");
+const appShell = document.querySelector(".app-shell");
 
 let currentMode = null;
 let currentModeKey = null;
@@ -262,6 +266,7 @@ let totalScore = getStoredTotalScore();
 let revealInterval = null;
 let answerInterval = null;
 let canAnswer = false;
+let showBonusMessage = false;
 
 function getStoredTotalScore() {
   const savedValue = Number.parseInt(localStorage.getItem(TOTAL_SCORE_KEY) || "0", 10);
@@ -280,6 +285,10 @@ function updateBonusVisibility() {
   bonusModeCard.hidden = !isBonusUnlocked();
 }
 
+function updateMessageButton() {
+  messageButton.hidden = !showBonusMessage;
+}
+
 function showScreen(screenName) {
   Object.entries(screens).forEach(([key, screen]) => {
     screen.classList.toggle("active", key === screenName);
@@ -296,6 +305,9 @@ function startGame(modeKey) {
     return;
   }
 
+  appShell.classList.remove("clearing", "show-letter");
+  showBonusMessage = false;
+  updateMessageButton();
   currentMode = GAME_MODES[modeKey];
   currentModeKey = modeKey;
   currentQuestionIndex = 0;
@@ -422,6 +434,8 @@ function showResults() {
   clearTimers();
   showScreen("result");
   updateBonusVisibility();
+  showBonusMessage = currentModeKey === "bonus";
+  updateMessageButton();
 
   const totalQuestions = currentMode.questions.length;
   const percentage = Math.round((score / totalQuestions) * 100);
@@ -450,8 +464,23 @@ function backToMenu() {
   clearTimers();
   currentMode = null;
   currentModeKey = null;
+  showBonusMessage = false;
+  updateMessageButton();
+  appShell.classList.remove("clearing", "show-letter");
   updateBonusVisibility();
   showScreen("menu");
+}
+
+function showLetter() {
+  showBonusMessage = false;
+  updateMessageButton();
+  appShell.classList.add("clearing");
+
+  window.setTimeout(() => {
+    appShell.classList.remove("clearing");
+    appShell.classList.add("show-letter");
+    showScreen("letter");
+  }, 650);
 }
 
 document.querySelectorAll(".mode-card").forEach((button) => {
@@ -459,6 +488,7 @@ document.querySelectorAll(".mode-card").forEach((button) => {
 });
 
 updateBonusVisibility();
+updateMessageButton();
 
 nextButton.addEventListener("click", goToNextQuestion);
 menuButton.addEventListener("click", backToMenu);
@@ -468,3 +498,5 @@ playAgainButton.addEventListener("click", () => {
   }
 });
 resultMenuButton.addEventListener("click", backToMenu);
+letterMenuButton.addEventListener("click", backToMenu);
+messageButton.addEventListener("click", showLetter);

@@ -35,6 +35,17 @@ body {
   padding: 24px;
 }
 
+.app-shell.clearing .game-card {
+  opacity: 0;
+  transform: translateY(28px) scale(0.97);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.app-shell.show-letter {
+  place-items: stretch;
+}
+
 .game-card {
   width: min(920px, 100%);
   background:
@@ -44,6 +55,7 @@ body {
   border-radius: 28px;
   box-shadow: var(--shadow);
   padding: 32px;
+  transition: opacity 0.65s ease, transform 0.65s ease, filter 0.65s ease, width 0.65s ease;
 }
 
 .game-header {
@@ -205,12 +217,24 @@ h1 {
 }
 
 .prompt-panel,
-.result-panel {
+.result-panel,
+.letter-panel {
   background: linear-gradient(160deg, rgba(255, 249, 252, 0.44), rgba(241, 248, 242, 0.34));
   border-radius: 24px;
   padding: 26px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
+}
+
+.letter-panel {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.letter-text {
+  color: rgba(47, 42, 51, 0.8);
+  line-height: 1.8;
+  font-size: 1.05rem;
 }
 
 .phase-label {
@@ -285,6 +309,31 @@ h1 {
   border: 1px solid rgba(84, 116, 99, 0.24);
 }
 
+.message-button {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 62px;
+  height: 62px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(248, 169, 203, 0.96), rgba(182, 209, 186, 0.96));
+  color: #fffdfd;
+  box-shadow: 0 16px 28px rgba(91, 73, 83, 0.2);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.message-button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 20px 34px rgba(91, 73, 83, 0.24);
+}
+
+.message-icon {
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
 @media (max-width: 640px) {
   .game-card {
     padding: 22px;
@@ -302,5 +351,10 @@ h1 {
   .action-button,
   .ghost-button {
     width: 100%;
+  }
+
+  .message-button {
+    right: 18px;
+    bottom: 18px;
   }
 }
