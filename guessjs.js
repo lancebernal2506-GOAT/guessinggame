@@ -237,7 +237,8 @@ const screens = {
   menu: document.getElementById("menuScreen"),
   game: document.getElementById("gameScreen"),
   result: document.getElementById("resultScreen"),
-  letter: document.getElementById("letterScreen")
+  letter: document.getElementById("letterScreen"),
+  secret: document.getElementById("secretScreen")
 };
 
 const modeLabel = document.getElementById("modeLabel");
@@ -256,8 +257,11 @@ const playAgainButton = document.getElementById("playAgainButton");
 const resultMenuButton = document.getElementById("resultMenuButton");
 const bonusModeCard = document.getElementById("bonusModeCard");
 const letterMenuButton = document.getElementById("letterMenuButton");
+const letterArrowButton = document.getElementById("letterArrowButton");
 const messageButton = document.getElementById("messageButton");
 const appShell = document.querySelector(".app-shell");
+const secretStage = document.querySelector(".secret-stage");
+const secretEnvelopeButton = document.getElementById("secretEnvelopeButton");
 
 let currentMode = null;
 let currentModeKey = null;
@@ -297,8 +301,9 @@ function updateBonusVisibility() {
 
 function updateMessageButton() {
   const onMenuScreen = screens.menu.classList.contains("active");
+  const isPlayingFirstBonusRun = currentModeKey === "bonus" && !bonusCompleted && screens.game.classList.contains("active");
   const canShowOnMenu = onMenuScreen && isBonusUnlocked() && bonusCompleted;
-  messageButton.hidden = !(showBonusMessage || canShowOnMenu);
+  messageButton.hidden = isPlayingFirstBonusRun || !(showBonusMessage || canShowOnMenu);
 }
 
 function showScreen(screenName) {
@@ -317,7 +322,8 @@ function startGame(modeKey) {
     return;
   }
 
-  appShell.classList.remove("clearing", "show-letter");
+  appShell.classList.remove("clearing", "show-letter", "show-secret");
+  secretStage.classList.remove("open");
   showBonusMessage = false;
   updateMessageButton();
   currentMode = GAME_MODES[modeKey];
@@ -481,7 +487,8 @@ function backToMenu() {
   currentMode = null;
   currentModeKey = null;
   showBonusMessage = false;
-  appShell.classList.remove("clearing", "show-letter");
+  appShell.classList.remove("clearing", "show-letter", "show-secret");
+  secretStage.classList.remove("open");
   updateBonusVisibility();
   showScreen("menu");
   updateMessageButton();
@@ -494,10 +501,27 @@ function showLetter() {
 
   window.setTimeout(() => {
     appShell.classList.remove("clearing");
+    appShell.classList.remove("show-secret");
     appShell.classList.add("show-letter");
     showScreen("letter");
     updateMessageButton();
   }, 650);
+}
+
+function showSecretStage() {
+  appShell.classList.add("clearing");
+
+  window.setTimeout(() => {
+    appShell.classList.remove("clearing");
+    appShell.classList.remove("show-letter");
+    appShell.classList.add("show-secret");
+    secretStage.classList.remove("open");
+    showScreen("secret");
+  }, 650);
+}
+
+function openSecretLetter() {
+  secretStage.classList.add("open");
 }
 
 document.querySelectorAll(".mode-card").forEach((button) => {
@@ -516,4 +540,6 @@ playAgainButton.addEventListener("click", () => {
 });
 resultMenuButton.addEventListener("click", backToMenu);
 letterMenuButton.addEventListener("click", backToMenu);
+letterArrowButton.addEventListener("click", showSecretStage);
 messageButton.addEventListener("click", showLetter);
+secretEnvelopeButton.addEventListener("click", openSecretLetter);

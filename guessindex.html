@@ -87,17 +87,41 @@
       <section id="letterScreen" class="screen">
         <article class="letter-panel">
           <p class="eyebrow">A Little Message</p>
-          <h2>You finished the hidden round.</h2>
+          <h2>Congratulations for finishing the Bonus Round!</h2>
           <p class="letter-text">
-            This is your secret ending. Thanks for playing through the game and making it all the way to the bonus round.
+            
           </p>
           <p class="letter-text">
-            You can turn this into a personal letter, a funny reveal, or a special note for someone important to you.
+           Akala mo guessing game lang to no? Well meron pa akong surprise sayo. You can click the button sa bandang kanan if ready ka na sa surprise ko sayo hehehe.
           </p>
-          <div class="controls centered">
-            <button id="letterMenuButton" class="action-button" type="button">Back to Menu</button>
+          <div class="controls letter-controls">
+            <button id="letterMenuButton" class="ghost-button letter-wait-button" type="button">wait not yet ready...</button>
           </div>
+          <button id="letterArrowButton" class="letter-arrow-button" type="button" aria-label="Continue">
+            <span aria-hidden="true">→</span>
+          </button>
         </article>
+      </section>
+
+      <section id="secretScreen" class="screen">
+        <div class="secret-stage">
+          <button id="secretEnvelopeButton" class="secret-envelope-button" type="button" aria-label="Open secret letter">
+            <span class="secret-envelope-heart" aria-hidden="true">♥</span>
+            <span class="secret-envelope-flap" aria-hidden="true"></span>
+            <span class="secret-envelope-paper" aria-hidden="true"></span>
+          </button>
+
+          <article id="secretPaper" class="secret-paper">
+            <p class="eyebrow">Secret Letter</p>
+            <h2>For you.</h2>
+            <p class="letter-text">
+              This is the hidden letter inside the envelope. You can replace this with your real surprise message anytime.
+            </p>
+            <p class="letter-text">
+              Make it sweet, funny, dramatic, or super personal. The opening animation is ready for whatever you want to write here.
+            </p>
+          </article>
+        </div>
       </section>
     </section>
   </main>
