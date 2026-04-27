@@ -1,1 +1,389 @@
+const QUESTION_DELAY = 5;
 
+const GAME_MODES = {
+  easy: {
+    label: "Easy",
+    theme: "General Knowledge",
+    answerTime: 12,
+    questions: [
+      {
+        prompt: "Which planet is known as the Red Planet?",
+        choices: ["Mars", "Venus", "Jupiter", "Mercury"],
+        answer: "Mars"
+      },
+      {
+        prompt: "What is the largest mammal in the world?",
+        choices: ["Elephant", "Blue whale", "Giraffe", "Hippopotamus"],
+        answer: "Blue whale"
+      },
+      {
+        prompt: "How many days are there in a leap year?",
+        choices: ["364", "365", "366", "367"],
+        answer: "366"
+      },
+      {
+        prompt: "Which ocean is the biggest on Earth?",
+        choices: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+        answer: "Pacific Ocean"
+      },
+      {
+        prompt: "What do bees mainly collect from flowers?",
+        choices: ["Sand", "Nectar", "Snow", "Pebbles"],
+        answer: "Nectar"
+      },
+      {
+        prompt: "Which shape has three sides?",
+        choices: ["Square", "Circle", "Triangle", "Rectangle"],
+        answer: "Triangle"
+      },
+      {
+        prompt: "What gas do humans need to breathe to stay alive?",
+        choices: ["Hydrogen", "Carbon dioxide", "Oxygen", "Helium"],
+        answer: "Oxygen"
+      },
+      {
+        prompt: "Which instrument usually has black and white keys?",
+        choices: ["Drum", "Piano", "Violin", "Trumpet"],
+        answer: "Piano"
+      },
+      {
+        prompt: "What is the freezing point of water in Celsius?",
+        choices: ["0", "10", "32", "100"],
+        answer: "0"
+      },
+      {
+        prompt: "Which animal is famous for carrying its house on its back?",
+        choices: ["Rabbit", "Snail", "Frog", "Cat"],
+        answer: "Snail"
+      }
+    ]
+  },
+  medium: {
+    label: "Medium",
+    theme: "Filipino Cuisine",
+    answerTime: 8,
+    questions: [
+      {
+        prompt: "Which Filipino dish is often called the country's unofficial national dish?",
+        choices: ["Adobo", "Sinigang", "Kare-kare", "Laing"],
+        answer: "Adobo"
+      },
+      {
+        prompt: "What souring agent is commonly used in sinigang?",
+        choices: ["Tamarind", "Chocolate", "Soy sauce", "Annatto"],
+        answer: "Tamarind"
+      },
+      {
+        prompt: "Which rice cake is traditionally purple because of ube?",
+        choices: ["Puto bumbong", "Bibingka", "Kutsinta", "Sapin-sapin"],
+        answer: "Puto bumbong"
+      },
+      {
+        prompt: "Kare-kare is best known for having what kind of sauce?",
+        choices: ["Tomato sauce", "Peanut sauce", "Coconut sauce", "Vinegar sauce"],
+        answer: "Peanut sauce"
+      },
+      {
+        prompt: "Which crispy pork dish is famous in Cebu?",
+        choices: ["Lechon", "Tinola", "Dinuguan", "Bistek"],
+        answer: "Lechon"
+      },
+      {
+        prompt: "What is the main protein in the dish chicken inasal?",
+        choices: ["Pork", "Beef", "Chicken", "Fish"],
+        answer: "Chicken"
+      },
+      {
+        prompt: "Which dessert usually combines shaved ice, milk, and mixed sweet ingredients?",
+        choices: ["Leche flan", "Halo-halo", "Turon", "Buko pie"],
+        answer: "Halo-halo"
+      },
+      {
+        prompt: "Sisig is traditionally made from chopped pork and served on what kind of plate?",
+        choices: ["Wooden plate", "Glass tray", "Sizzling plate", "Banana leaf bowl"],
+        answer: "Sizzling plate"
+      },
+      {
+        prompt: "What wrapping is commonly used for suman?",
+        choices: ["Nori", "Cabbage leaves", "Banana leaves", "Parchment paper"],
+        answer: "Banana leaves"
+      },
+      {
+        prompt: "What sweet yellow fruit is often used in turon?",
+        choices: ["Mango", "Jackfruit", "Pineapple", "Papaya"],
+        answer: "Jackfruit"
+      }
+    ]
+  },
+  hard: {
+    label: "Hard",
+    theme: "Filipino Singers, Bands, and Rappers",
+    answerTime: 5,
+    questions: [
+      {
+        prompt: "Who is widely known as the King of Pinoy Rap?",
+        choices: ["Gloc-9", "Andrew E.", "Francis M.", "Abra"],
+        answer: "Francis M."
+      },
+      {
+        prompt: "Which band released the hit song 'Narda'?",
+        choices: ["Eraserheads", "Kamikazee", "Parokya ni Edgar", "Rivermaya"],
+        answer: "Kamikazee"
+      },
+      {
+        prompt: "Which of these OPM artists is a solo singer-songwriter rather than a band?",
+        choices: ["Moira Dela Torre", "Ben&Ben", "Rivermaya", "Kamikazee"],
+        answer: "Moira Dela Torre"
+      },
+      {
+        prompt: "Which legendary OPM band is associated with Ely Buendia?",
+        choices: ["Ben&Ben", "Eraserheads", "The Juans", "December Avenue"],
+        answer: "Eraserheads"
+      },
+      {
+        prompt: "Who sang the song 'Anak,' one of the most famous Filipino songs worldwide?",
+        choices: ["Gary Valenciano", "Freddie Aguilar", "Martin Nievera", "Ogie Alcasid"],
+        answer: "Freddie Aguilar"
+      },
+      {
+        prompt: "Which rapper is known for socially conscious storytelling in songs like 'Upuan'?",
+        choices: ["Gloc-9", "Bassilyo", "Skusta Clee", "Loonie"],
+        answer: "Gloc-9"
+      },
+      {
+        prompt: "Ben&Ben originally became known as what duo name?",
+        choices: ["The Benjamins", "The Dawn", "The Remedy", "The Barefoot Duo"],
+        answer: "The Barefoot Duo"
+      },
+      {
+        prompt: "Which Filipina singer is known for powerful performances and won The X Factor Philippines?",
+        choices: ["Sarah Geronimo", "KZ Tandingan", "Regine Velasquez", "Morisette"],
+        answer: "KZ Tandingan"
+      },
+      {
+        prompt: "Parokya ni Edgar is especially known for blending rock with what style of lyrics?",
+        choices: ["Purely classical", "Humorous and playful", "Only religious", "Entirely instrumental"],
+        answer: "Humorous and playful"
+      },
+      {
+        prompt: "Which Filipino band is known for the song '214'?",
+        choices: ["Rivermaya", "Moonstar88", "Siakol", "Callalily"],
+        answer: "Rivermaya"
+      }
+    ]
+  }
+};
+
+const screens = {
+  menu: document.getElementById("menuScreen"),
+  game: document.getElementById("gameScreen"),
+  result: document.getElementById("resultScreen")
+};
+
+const modeLabel = document.getElementById("modeLabel");
+const questionCounter = document.getElementById("questionCounter");
+const scoreValue = document.getElementById("scoreValue");
+const timerValue = document.getElementById("timerValue");
+const phaseLabel = document.getElementById("phaseLabel");
+const questionText = document.getElementById("questionText");
+const feedbackText = document.getElementById("feedbackText");
+const choicesContainer = document.getElementById("choicesContainer");
+const nextButton = document.getElementById("nextButton");
+const menuButton = document.getElementById("menuButton");
+const resultTitle = document.getElementById("resultTitle");
+const resultSummary = document.getElementById("resultSummary");
+const playAgainButton = document.getElementById("playAgainButton");
+const resultMenuButton = document.getElementById("resultMenuButton");
+
+let currentMode = null;
+let currentQuestionIndex = 0;
+let score = 0;
+let revealInterval = null;
+let answerInterval = null;
+let canAnswer = false;
+
+function showScreen(screenName) {
+  Object.entries(screens).forEach(([key, screen]) => {
+    screen.classList.toggle("active", key === screenName);
+  });
+}
+
+function clearTimers() {
+  clearInterval(revealInterval);
+  clearInterval(answerInterval);
+}
+
+function startGame(modeKey) {
+  currentMode = GAME_MODES[modeKey];
+  currentQuestionIndex = 0;
+  score = 0;
+  scoreValue.textContent = score;
+  modeLabel.textContent = `${currentMode.label} | ${currentMode.theme}`;
+  showScreen("game");
+  renderQuestion();
+}
+
+function renderQuestion() {
+  clearTimers();
+  canAnswer = false;
+  feedbackText.textContent = "";
+  choicesContainer.innerHTML = "";
+  nextButton.hidden = true;
+
+  const currentQuestion = currentMode.questions[currentQuestionIndex];
+  questionCounter.textContent = `${currentQuestionIndex + 1} / ${currentMode.questions.length}`;
+  questionText.textContent = currentQuestion.prompt;
+
+  let revealTimeLeft = QUESTION_DELAY;
+  phaseLabel.textContent = "Memorize the question before the choices appear.";
+  timerValue.textContent = revealTimeLeft;
+
+  revealInterval = setInterval(() => {
+    revealTimeLeft -= 1;
+    timerValue.textContent = Math.max(revealTimeLeft, 0);
+
+    if (revealTimeLeft <= 0) {
+      clearInterval(revealInterval);
+      showChoices();
+    }
+  }, 1000);
+}
+
+function showChoices() {
+  const currentQuestion = currentMode.questions[currentQuestionIndex];
+  phaseLabel.textContent = "Choose your answer now.";
+  canAnswer = true;
+
+  currentQuestion.choices.forEach((choice) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "choice-button";
+    button.textContent = choice;
+    button.addEventListener("click", () => handleAnswer(choice, button));
+    choicesContainer.appendChild(button);
+  });
+
+  let answerTimeLeft = currentMode.answerTime;
+  timerValue.textContent = answerTimeLeft;
+
+  answerInterval = setInterval(() => {
+    answerTimeLeft -= 1;
+    timerValue.textContent = Math.max(answerTimeLeft, 0);
+
+    if (answerTimeLeft <= 0) {
+      clearInterval(answerInterval);
+      handleTimeout();
+    }
+  }, 1000);
+}
+
+function handleAnswer(selectedChoice, selectedButton) {
+  if (!canAnswer) {
+    return;
+  }
+
+  clearInterval(answerInterval);
+  canAnswer = false;
+
+  const currentQuestion = currentMode.questions[currentQuestionIndex];
+  const buttons = [...choicesContainer.querySelectorAll(".choice-button")];
+
+  buttons.forEach((button) => {
+    button.disabled = true;
+
+    if (button.textContent === currentQuestion.answer) {
+      button.classList.add("correct");
+    }
+  });
+
+  if (selectedChoice === currentQuestion.answer) {
+    score += 1;
+    scoreValue.textContent = score;
+    feedbackText.textContent = "Correct answer!";
+  } else {
+    selectedButton.classList.add("incorrect");
+    feedbackText.textContent = `Not quite. The correct answer was ${currentQuestion.answer}.`;
+  }
+
+  phaseLabel.textContent = "Answer locked in.";
+  showNextStep();
+}
+
+function handleTimeout() {
+  if (!canAnswer) {
+    return;
+  }
+
+  canAnswer = false;
+  const currentQuestion = currentMode.questions[currentQuestionIndex];
+  const buttons = [...choicesContainer.querySelectorAll(".choice-button")];
+
+  buttons.forEach((button) => {
+    button.disabled = true;
+    if (button.textContent === currentQuestion.answer) {
+      button.classList.add("correct");
+    }
+  });
+
+  phaseLabel.textContent = "Time's up.";
+  feedbackText.textContent = `The correct answer was ${currentQuestion.answer}.`;
+  showNextStep();
+}
+
+function showNextStep() {
+  const isLastQuestion = currentQuestionIndex === currentMode.questions.length - 1;
+  nextButton.textContent = isLastQuestion ? "See Results" : "Next Question";
+  nextButton.hidden = false;
+}
+
+function goToNextQuestion() {
+  if (currentQuestionIndex === currentMode.questions.length - 1) {
+    showResults();
+    return;
+  }
+
+  currentQuestionIndex += 1;
+  renderQuestion();
+}
+
+function showResults() {
+  clearTimers();
+  showScreen("result");
+
+  const totalQuestions = currentMode.questions.length;
+  const percentage = Math.round((score / totalQuestions) * 100);
+
+  if (percentage === 100) {
+    resultTitle.textContent = "Perfect score!";
+  } else if (percentage >= 70) {
+    resultTitle.textContent = "Nice job!";
+  } else if (percentage >= 40) {
+    resultTitle.textContent = "Good try!";
+  } else {
+    resultTitle.textContent = "Keep practicing!";
+  }
+
+  resultSummary.textContent =
+    `You answered ${score} out of ${totalQuestions} questions correctly in ${currentMode.label} mode.`;
+}
+
+function backToMenu() {
+  clearTimers();
+  currentMode = null;
+  showScreen("menu");
+}
+
+document.querySelectorAll(".mode-card").forEach((button) => {
+  button.addEventListener("click", () => startGame(button.dataset.mode));
+});
+
+nextButton.addEventListener("click", goToNextQuestion);
+menuButton.addEventListener("click", backToMenu);
+playAgainButton.addEventListener("click", () => {
+  if (currentMode) {
+    startGame(
+      Object.keys(GAME_MODES).find((modeKey) => GAME_MODES[modeKey] === currentMode)
+    );
+  }
+});
+resultMenuButton.addEventListener("click", backToMenu);
