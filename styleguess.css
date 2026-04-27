@@ -9,7 +9,7 @@
   --sage-600: #547463;
   --ink: #2f2a33;
   --white: #ffffff;
-  --shadow: 0 18px 40px rgba(92, 58, 77, 0.18);
+  --shadow: 0 24px 60px rgba(111, 88, 99, 0.16);
 }
 
 * {
@@ -22,8 +22,10 @@ body {
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.7), transparent 35%),
-    linear-gradient(135deg, #ffd2e5 0%, #f6c3d9 35%, #c9ddc3 72%, #a8c6ad 100%);
+    radial-gradient(circle at 12% 18%, rgba(255, 244, 249, 0.95), transparent 30%),
+    radial-gradient(circle at 85% 22%, rgba(221, 239, 225, 0.82), transparent 28%),
+    radial-gradient(circle at 50% 90%, rgba(255, 235, 244, 0.4), transparent 34%),
+    linear-gradient(135deg, #f8c8db 0%, #f3d7e2 28%, #e4ddd8 55%, #d0e2d1 78%, #bdd8c0 100%);
 }
 
 .app-shell {
@@ -35,9 +37,10 @@ body {
 
 .game-card {
   width: min(920px, 100%);
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  background:
+    linear-gradient(145deg, rgba(255, 246, 250, 0.58), rgba(244, 248, 244, 0.44));
+  backdrop-filter: blur(18px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.34);
   border-radius: 28px;
   box-shadow: var(--shadow);
   padding: 32px;
@@ -108,8 +111,12 @@ h1 {
 .mode-card {
   padding: 22px;
   text-align: left;
-  background: linear-gradient(180deg, rgba(255, 241, 247, 0.95), rgba(237, 246, 239, 0.95));
-  box-shadow: 0 12px 26px rgba(101, 90, 95, 0.12);
+  color: var(--ink);
+  background:
+    linear-gradient(135deg, rgba(248, 178, 209, 0.64), rgba(214, 223, 208, 0.56), rgba(183, 214, 188, 0.66));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 14px 30px rgba(120, 98, 109, 0.12);
+  backdrop-filter: blur(8px);
 }
 
 .mode-card:hover,
@@ -117,7 +124,18 @@ h1 {
 .action-button:hover,
 .ghost-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 24px rgba(79, 67, 74, 0.14);
+  box-shadow: 0 18px 28px rgba(94, 77, 85, 0.14);
+}
+
+.mode-card:nth-child(2) {
+  background:
+    linear-gradient(135deg, rgba(255, 224, 236, 0.6), rgba(230, 222, 218, 0.55), rgba(189, 219, 194, 0.68));
+}
+
+.mode-card:nth-child(3) {
+  background:
+    linear-gradient(135deg, rgba(220, 126, 169, 0.72), rgba(214, 194, 199, 0.58), rgba(171, 203, 176, 0.72));
+  color: #fffafc;
 }
 
 .mode-name,
@@ -142,6 +160,11 @@ h1 {
   color: rgba(47, 42, 51, 0.7);
 }
 
+.mode-card:nth-child(3) .mode-theme,
+.mode-card:nth-child(3) .mode-meta {
+  color: rgba(255, 250, 252, 0.88);
+}
+
 .status-bar {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -150,10 +173,11 @@ h1 {
 }
 
 .status-pill {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(84, 116, 99, 0.16);
+  background: rgba(255, 252, 253, 0.46);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 18px;
   padding: 14px 16px;
+  backdrop-filter: blur(8px);
 }
 
 .status-pill span {
@@ -170,15 +194,16 @@ h1 {
 }
 
 .timer-pill {
-  background: linear-gradient(180deg, rgba(248, 169, 203, 0.25), rgba(182, 209, 186, 0.35));
+  background: linear-gradient(180deg, rgba(248, 169, 203, 0.26), rgba(182, 209, 186, 0.28));
 }
 
 .prompt-panel,
 .result-panel {
-  background: rgba(255, 255, 255, 0.74);
+  background: linear-gradient(160deg, rgba(255, 249, 252, 0.44), rgba(241, 248, 242, 0.34));
   border-radius: 24px;
   padding: 26px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
 }
 
 .phase-label {
