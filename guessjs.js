@@ -1,5 +1,5 @@
 const BONUS_UNLOCK_SCORE = 25;
-const TOTAL_SCORE_KEY = "guessing-game-total-score";
+const TOTAL_SCORE_KEY = "26";
 
 const GAME_MODES = {
   easy: {
