@@ -1,4 +1,3 @@
-const QUESTION_DELAY = 5;
 const BONUS_UNLOCK_SCORE = 25;
 const TOTAL_SCORE_KEY = "guessing-game-total-score";
 
@@ -317,19 +316,7 @@ function renderQuestion() {
   const currentQuestion = currentMode.questions[currentQuestionIndex];
   questionCounter.textContent = `${currentQuestionIndex + 1} / ${currentMode.questions.length}`;
   questionText.textContent = currentQuestion.prompt;
-
-  let revealTimeLeft = QUESTION_DELAY;
-  phaseLabel.textContent = "Memorize the question before the choices appear.";
-  timerValue.textContent = "--";
-
-  revealInterval = setInterval(() => {
-    revealTimeLeft -= 1;
-
-    if (revealTimeLeft <= 0) {
-      clearInterval(revealInterval);
-      showChoices();
-    }
-  }, 1000);
+  showChoices();
 }
 
 function showChoices() {
