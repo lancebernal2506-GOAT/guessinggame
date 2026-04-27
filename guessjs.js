@@ -251,6 +251,8 @@ const feedbackText = document.getElementById("feedbackText");
 const choicesContainer = document.getElementById("choicesContainer");
 const nextButton = document.getElementById("nextButton");
 const menuButton = document.getElementById("menuButton");
+const instructionsButton = document.getElementById("instructionsButton");
+const instructionsPanel = document.getElementById("instructionsPanel");
 const resultTitle = document.getElementById("resultTitle");
 const resultSummary = document.getElementById("resultSummary");
 const playAgainButton = document.getElementById("playAgainButton");
@@ -524,6 +526,10 @@ function openSecretLetter() {
   secretStage.classList.add("open");
 }
 
+function toggleInstructions() {
+  instructionsPanel.hidden = !instructionsPanel.hidden;
+}
+
 document.querySelectorAll(".mode-card").forEach((button) => {
   button.addEventListener("click", () => startGame(button.dataset.mode));
 });
@@ -543,3 +549,4 @@ letterMenuButton.addEventListener("click", backToMenu);
 letterArrowButton.addEventListener("click", showSecretStage);
 messageButton.addEventListener("click", showLetter);
 secretEnvelopeButton.addEventListener("click", openSecretLetter);
+instructionsButton.addEventListener("click", toggleInstructions);

@@ -18,6 +18,20 @@
       </div>
 
       <section id="menuScreen" class="screen active">
+        <div class="menu-actions">
+          <button id="instructionsButton" class="ghost-button instructions-button" type="button">Instructions</button>
+        </div>
+
+        <section id="instructionsPanel" class="instructions-panel" hidden>
+          <p class="eyebrow">How To Play</p>
+          <ol class="instructions-list">
+            <li>There are 3 modes, Easy, Medium, Hard.</li>
+            <li>Each mode have it's own theme and time limit.</li>
+            <li>Earn 25 points total to unlock the bonus round.</li>
+            <li>DO NOT RESET, PROGRESS WILL NOT BE SAVED</li>
+          </ol>
+        </section>
+
         <div class="menu-grid">
           <button class="mode-card" data-mode="easy" type="button">
             <span class="mode-name">Easy</span>
@@ -112,8 +126,8 @@
           </button>
 
           <article id="secretPaper" class="secret-paper">
-            <p class="eyebrow">Secret Letter</p>
-            <h2>For you.</h2>
+            <p class="eyebrow">My Confession</p>
+            <h2>For you, Lil Faith.</h2>
             <p class="letter-text">
               This is the hidden letter inside the envelope. You can replace this with your real surprise message anytime.
             </p>
