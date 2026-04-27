@@ -1,26 +1,6 @@
 const BONUS_UNLOCK_SCORE = 25;
 const TOTAL_SCORE_KEY = "guessing-game-total-score";
 const BONUS_COMPLETED_KEY = "guessing-game-bonus-completed";
-const SECRET_LETTER_TITLE = "For you, Lil Faith.";
-const SECRET_LETTER_PARAGRAPHS = [
-  "Hello, panget HAHAHAHA de joke lang. I'm writing this kase di ka naniniwala na may feelings ako sayo pero if i was in your shoes, I'd do the same thing din sa ginagawa mo. Yes, I'm not joking and yes, I do like you, Faith. Pero bago ang lahat, let's go back to 2024.",
-  "Nung una unang weeks ng 2nd year, I was attracted to you kasi nga, cute ka kinginang mukha kasi yan. So naging crush kita and that only lasted for a week kasi nga, bf mo si Josh that time. Edi after non, uncrush, 2nd year stuffs and Maui and bla bla and si ex mu. To be clear lang ha, wala na talaga akong kahit anong feelings sayo at that point kaya yon pero wag ka muna tumigil mag basa.",
-  "3rd year, hardest year in our curriculum and yeah, i don't know why but suddenly, i found myself slowly liking you again. At first, i was confused. As in di ko alam kung bakit ganun nararamdaman ko kaya pinilit kong alamin kung bakit kita crush and as I got to know you better, it became clear. I liked your personality, confidence, kindness, leadership, perseverance, and beauty. Nag start siya alam ko from August. I approached you and tried to be close to you. Akala ko may progress ako nun kasi ang bait mo kasi and I assumed some things na di pala dapat inaassume hahaha. I thought it was going fine until I saw you mentioning Hulyo to your notes and posting him to your stories.",
-  "I'll admit, i got jealous so I started monitoring your notes and stories mula non. Tapos non, i think last week ng August or first day ng September, you posted a story of you and Hulyo eating somewhere. I remember talking to Maui that night nung nakita ko yun and i was having doubts kung kayo nga. Iniisip namin ni Maui na friend lang talaga kayo but the next day, nagsend sakin si Maui ng chats niyo sa gc kasi nahot seat ka ni Buri non and yon sinend sakin tas naconfirm na namin. I got heartbroken nung nakita ko yon but i played it off kase, bakit ko ba naramdaman yon diba? Pero yeah it's alright, shit happens.",
-  "Then after non, okay lang naman ako, naka get over naman plus, I'm happy for you kasi may potential bf ka na and naging close friends us which is good and I still cherish it until now. Di ko na include nung nag open up ka kay Hulyo nung November kasi di naman bumalik feelings ko non tsaka irrelevant siya.",
-  "Naalala mo nung nag kwento ko about sayo nung readings ko sa tarot? Yung if magkaka love life ba ko this year? Sana naalala mo kase at that point, naiisip na naman kita ulit. Actually, 1 week before pa nung tarot, bumabalik na naman yung di maipaliwanag na feeling na yun. March 22 or 23, i started the flirt kase wala lang, andun na e tsaka gusto rin kitang asarin and yun nga, merong bumabalik na feeling.",
-  "On March 24, nakwento ko ung sa tarot and nag usap us slight about sa feelings ko. Totoo sinabi ko sayo non, talagang hindi ako sure sa feelings ko, na parang may something pa sa akin na di ko ma figure out kaya di ako makapasok sa rel ulit. I tried my hardest na pigilan ulit magustuhan ka kasi nga, I'm liking you again but for what reason? I was trying to figure out why i feel that way again. Ayoko kasing umamin na gusto kita tapos wala akong dahilan diba? parang trippings lang kung ganun man nangyari.",
-  "I even tried to distance myself to you during holy week kasi i thought na baka pag nilayuan kita, mawala feelings ko pero mas lumalala siya. Lagi kitang iniisip, lagi kitang hinahanap. Because of that and considering other stuff, there was no other answer.",
-  "I like you.",
-  "I find your cheerful nature really charming, and I admire how much you care about others. Whenever I open up to you, you're always so attentive and make me feel truly heard. Your comforting words have a way of soothing me, and it means more than I can explain. The way you speak, laugh, smile, and just be yourself, it honestly makes my heart flutter. I also really admire your strength. No matter how hard life gets, you keep pushing forward, and that inspires me a lot. There are probably so many more reasons, but these are the ones I can put into words for now.",
-  "My type on a girl isn't Maui, it's you. Mabait, masipag, matalino, emotionally intelligent, caring, sweet, supportive, morena.",
-  "Sinubukan kong kabisaduhin ka kasi gusto kong maalagaan ka ng maayos at saka ganun talaga e, gusto kita e hays. Also sinusubukan ko rin maging better as a person because i want to give you the best version of me. Ayaw na kitang makitang masaktan ng lalaki kasi i know to myself na hindi kita masasaktan. I want to show you and make you feel what love means again. I know na di ka pa ready ulit sa relationship and focus ka sa sarili mo and I'm probably not your type but you're the risk I'm willing to take because I know that you are worth it.",
-  "You're one of a kind, Faith, you deserve every good thing this world has to offer and if you'll allow me, without any rush and pressure, I want to pursue you to prove myself worthy of your love. I assure you, i have a genuine intention with you, to love you the way you deserved to be.",
-  "Ge na, minsan lang e, payag ka na, charot.",
-  "If masira man friendship natin because of this, it's okay. It's not your fault kasi di naman ikaw yung na fall e huhu pero I'll forever cherish our friendship parin. One of the best friendships I have, to be honest.",
-  "My original plan was to give you a handwritten confession letter but since I can't come with you guys sa Manila, I decided to exert all of my efforts to create this website to confess my feelings to you. I hope you like it and I hope it shows how much I care for you. I know this is a lot to take in, so take all the time you need to process this. I'll be here, supporting you no matter what.",
-  "Hays, good luck with everything po, kakayanin natin ojt and 4th year. Walang susuko ha, dapat mag graduate tayo next year bro."
-];
 
 const GAME_MODES = {
   easy: {
@@ -284,7 +264,6 @@ const messageButton = document.getElementById("messageButton");
 const appShell = document.querySelector(".app-shell");
 const secretStage = document.querySelector(".secret-stage");
 const secretEnvelopeButton = document.getElementById("secretEnvelopeButton");
-const secretPaper = document.getElementById("secretPaper");
 
 let currentMode = null;
 let currentModeKey = null;
@@ -544,32 +523,7 @@ function showSecretStage() {
 }
 
 function openSecretLetter() {
-  renderSecretLetter();
   secretStage.classList.add("open");
-}
-
-function renderSecretLetter() {
-  if (secretPaper.dataset.ready === "true") {
-    return;
-  }
-
-  const eyebrow = document.createElement("p");
-  eyebrow.className = "eyebrow";
-  eyebrow.textContent = "My Confession";
-  secretPaper.appendChild(eyebrow);
-
-  const title = document.createElement("h2");
-  title.textContent = SECRET_LETTER_TITLE;
-  secretPaper.appendChild(title);
-
-  SECRET_LETTER_PARAGRAPHS.forEach((text) => {
-    const paragraph = document.createElement("p");
-    paragraph.className = "letter-text";
-    paragraph.textContent = text;
-    secretPaper.appendChild(paragraph);
-  });
-
-  secretPaper.dataset.ready = "true";
 }
 
 function toggleInstructions() {
