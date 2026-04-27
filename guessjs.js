@@ -1,6 +1,4 @@
 const BONUS_UNLOCK_SCORE = 25;
-const TOTAL_SCORE_KEY = "guessing-game-total-score";
-const BONUS_COMPLETED_KEY = "guessing-game-bonus-completed";
 
 const GAME_MODES = {
   easy: {
@@ -269,28 +267,19 @@ let currentMode = null;
 let currentModeKey = null;
 let currentQuestionIndex = 0;
 let score = 0;
-let totalScore = getStoredTotalScore();
+let totalScore = 0;
 let revealInterval = null;
 let answerInterval = null;
 let canAnswer = false;
 let showBonusMessage = false;
-let bonusCompleted = getBonusCompletedState();
-
-function getStoredTotalScore() {
-  const savedValue = Number.parseInt(localStorage.getItem(TOTAL_SCORE_KEY) || "0", 10);
-  return Number.isNaN(savedValue) ? 0 : savedValue;
-}
+let bonusCompleted = false;
 
 function saveTotalScore() {
-  localStorage.setItem(TOTAL_SCORE_KEY, String(totalScore));
-}
-
-function getBonusCompletedState() {
-  return localStorage.getItem(BONUS_COMPLETED_KEY) === "true";
+  // Progress is intentionally kept in memory only so it resets after leaving the site.
 }
 
 function saveBonusCompletedState() {
-  localStorage.setItem(BONUS_COMPLETED_KEY, String(bonusCompleted));
+  // Progress is intentionally kept in memory only so it resets after leaving the site.
 }
 
 function isBonusUnlocked() {
