@@ -367,6 +367,8 @@ let currentModeKey = null;
 let currentQuestionIndex = 0;
 let score = 0;
 let totalScore = 0;
+let currentRoundCorrectAnswers = new Set();
+const creditedAnswersByMode = {};
 let revealInterval = null;
 let answerInterval = null;
 let canAnswer = false;
@@ -435,6 +437,7 @@ function startGame(modeKey) {
   currentModeKey = modeKey;
   currentQuestionIndex = 0;
   score = 0;
+  currentRoundCorrectAnswers = new Set();
   scoreValue.textContent = score;
   modeLabel.textContent = `${currentMode.label} | ${currentMode.theme}`;
   showScreen("game");
@@ -503,8 +506,7 @@ function handleAnswer(selectedChoice, selectedButton) {
 
   if (selectedChoice === currentQuestion.answer) {
     score += 1;
-    totalScore += 1;
-    saveTotalScore();
+    currentRoundCorrectAnswers.add(currentQuestionIndex);
     scoreValue.textContent = score;
     feedbackText.textContent = "Correct answer!";
   } else {
@@ -555,6 +557,16 @@ function goToNextQuestion() {
 
 function showResults() {
   clearTimers();
+
+  if (!creditedAnswersByMode[currentModeKey]) {
+    creditedAnswersByMode[currentModeKey] = new Set();
+  }
+
+  const creditedAnswers = creditedAnswersByMode[currentModeKey];
+  const newlyEarnedAnswers = [...currentRoundCorrectAnswers].filter((questionIndex) => !creditedAnswers.has(questionIndex));
+  newlyEarnedAnswers.forEach((questionIndex) => creditedAnswers.add(questionIndex));
+  totalScore += newlyEarnedAnswers.length;
+  saveTotalScore();
   showScreen("result");
   updateBonusVisibility();
   showBonusMessage = currentModeKey === "bonus";
